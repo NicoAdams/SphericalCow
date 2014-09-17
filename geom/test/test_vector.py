@@ -2,7 +2,7 @@ import pytest
 import sys, os, imp
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-vector = imp.load_source('vector', 'gameplay/geom/vector.py')
+vector = imp.load_source('vector', 'geom/vector.py')
 from vector import Vector, fromPolar
 import math
 

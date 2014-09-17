@@ -2,7 +2,7 @@ import pytest
 import sys, os, imp
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-region = imp.load_source('region', 'gameplay/geom/region.py')
+region = imp.load_source('region', 'geom/region.py')
 from region import Region
 
 r0 = Region(0,0)
@@ -77,3 +77,4 @@ def test_minTranslation():
 	assert r3.minTranslation(r4) == 0
 	assert r3.minTranslation(r5) == 0
 	assert r1.minTranslation(r7) == 100
+	

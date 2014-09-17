@@ -2,7 +2,7 @@ import pytest
 import sys, os, imp
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-shape = imp.load_source('shape', 'gameplay/geom/shape.py')
+shape = imp.load_source('shape', 'geom/shape.py')
 from shape import Shape
 from vector import Vector
 from region import Region

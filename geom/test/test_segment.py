@@ -2,7 +2,7 @@ import pytest
 import sys, os, imp
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-segment = imp.load_source('segment', 'gameplay/geom/segment.py')
+segment = imp.load_source('segment', 'geom/segment.py')
 from segment import Segment
 from vector import Vector
 import math
