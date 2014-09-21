@@ -1,2 +1,3 @@
-pip install -e sphericalcow
-py.test
+currdir="$( dirname "${BASH_SOURCE[0]}" )"
+pip install -e "$currdir/sphericalcow"
+py.test $currdir

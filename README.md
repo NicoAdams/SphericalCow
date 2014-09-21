@@ -15,6 +15,19 @@ Features
 
 [Pending]
 
+Testing
+-------
+
+SphericalCow uses Py.test to run tests. All tests are stored in the external dir "test".
+
+To test, run
+
+	test/run
+
+from the base directory.
+
+[Pending]
+
 Known Bugs
 ----------
 
@@ -24,9 +37,6 @@ Enhancements
 ------------
 
 [Pending]
-
-License
--------
 
 License
 -------
