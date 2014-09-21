@@ -71,6 +71,14 @@ class Segment:
 			point-intersect, two for a segment-intersect 
 		"""
 		
+		# Manually handles zero-length lines
+		if self.len() == 0 or other.len() == 0: return [] 
+		
+		# Manually handles point overlaps
+		if self == other: return [self.p1, self.p2]
+		if self.p1 == other.p1 or self.p1 == other.p2: return []
+		if self.p2 == other.p1 or self.p2 == other.p2: return []
+		
 		# Maps problem to problem of locating other's x-intersect
 		toTranslate = self.p1.mul(-1)
 		toRotate = -1 * self.angle()

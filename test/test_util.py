@@ -1,8 +1,6 @@
 import pytest
-import sys, os, imp
-sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-util = imp.load_source('util', 'util.py')
+from sphericalcow import util
 import types
 
 def test_reqType():

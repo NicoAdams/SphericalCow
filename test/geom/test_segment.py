@@ -1,10 +1,7 @@
 import pytest
-import sys, os, imp
-sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-segment = imp.load_source('segment', 'geom/segment.py')
-from segment import Segment
-from vector import Vector
+from sphericalcow.geom.segment import Segment
+from sphericalcow.geom.vector import Vector
 import math
 
 s0 = Segment(Vector(0,0), Vector(0,0))
@@ -90,6 +87,14 @@ def test_intersect():
 	assert len(s5s6) == 2
 	assert Segment(s5s6[0], s5s6[1]).equalsInRange( \
 		Segment(Vector(3,3), Vector(5,3)), .01)
+	
+	# Edge cases
+	assert len( \
+		Segment(Vector(10, 0), Vector(10, 10)).intersect( \
+		Segment(Vector(10, 0), Vector(0, 10)))) == 0
+	assert len( \
+		Segment(Vector(10, 10), Vector(10, 0)).intersect( \
+		Segment(Vector(10, 0), Vector(0, 10)))) == 0
 	
 def test_overUnder():
 	# Over

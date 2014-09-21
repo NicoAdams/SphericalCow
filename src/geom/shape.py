@@ -193,6 +193,8 @@ class Shape:
 			intersection segment
 		Arguments:
 			other: [Shape] The other shape
+			pThresh: [float] The permitted error when testing for parallel
+				lines (default: 0) 
 		Returns: [List [Vector]] A list of the points of intersection between
 			the shapes' sides
 		"""
@@ -206,4 +208,19 @@ class Shape:
 					intersectList += \
 						[Segment(intersect[0], intersect[1]).center()]
 		return intersectList
+	
+	def getCollisionPoint(self, other, pThresh=0, p=False):
+		"""Determines the "collision point" between two intersecting shapes
+		Arguments:
+			other: [Shape] The colliding shape
+			pThresh: [float] The permitted error when testing for parallel
+				lines (default: 0)
+		Returns: [List [Vector]] An empty list if no collision, or a list of
+			a single point if there is a collision
+		"""
+		intersectionList = self.intersections(other)
+		if len(intersectionList) == 0:
+			return []
+		center = Shape(intersectionList).com()
+		return [center]
 	

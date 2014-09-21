@@ -1,11 +1,8 @@
 import pytest
-import sys, os, imp
-sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-shape = imp.load_source('shape', 'geom/shape.py')
-from shape import Shape
-from vector import Vector
-from region import Region
+from sphericalcow.geom.shape import Shape
+from sphericalcow.geom.vector import Vector
+from sphericalcow.geom.region import Region
 import math
 
 s0 = Shape([Vector(0,0)])
@@ -142,5 +139,30 @@ def test_intersections():
 	assert s1s1[1].equalsInRange(Vector(10,5), .001)
 	assert s1s1[2].equalsInRange(Vector(5,10), .001)
 	assert s1s1[3].equalsInRange(Vector(0,5), .001)
-	assert len(s1.copy().move(Vector(1,1)).intersections(s1)) == 2
+	s1s1c = s1.copy().move(Vector(1,1)).intersections(s1)
+	assert len(s1s1c) == 2
+	assert s1s1c[0].equalsInRange(Vector(10,1), .001)
+	assert s1s1c[1].equalsInRange(Vector(1,10), .001)
+	
+	# Literally a corner case
+	s1s2 = s1.intersections(s2)
+	assert len(s1s2) == 2
+	
+def test_getCollisionPoint():
+	assert len(s0.getCollisionPoint(s0)) == 0
+	
+	s1s1 = s1.getCollisionPoint(s1, pThresh=.001)
+	assert len(s1s1) == 1
+	assert s1s1[0].equalsInRange(Vector(5,5), .01)
+	
+	s1s2 = s1.getCollisionPoint(s2, pThresh=.001)
+	assert len(s1s2) == 1
+	assert s1s2[0].equalsInRange(Vector(2.5,2.5), .01)
+	
+	s1s1p1 = s1.getCollisionPoint(s1.copy().move(Vector(10,10)))
+	assert len(s1s1p1) == 0
+ 	
+ 	s1s1p2 = s1.getCollisionPoint(s1.copy().move(Vector(8,8)))
+	assert len(s1s1p2) == 1
+	assert s1s1p2[0].equalsInRange(Vector(9,9), .01)
 	

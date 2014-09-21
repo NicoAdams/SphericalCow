@@ -1,9 +1,6 @@
 import pytest
-import sys, os, imp
-sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 
-region = imp.load_source('region', 'geom/region.py')
-from region import Region
+from sphericalcow.geom.region import Region
 
 r0 = Region(0,0)
 r1 = Region(0,10)
