@@ -1,7 +1,7 @@
 import math
 import numpy
 
-class Vector:
+class Vector(object):
 	"""A 2D vector
 	"""
 	

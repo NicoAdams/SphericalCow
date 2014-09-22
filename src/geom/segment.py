@@ -3,7 +3,7 @@ import numpy
 from region import Region
 from vector import Vector, fromPolar
 
-class Segment:
+class Segment(object):
 	"""Represents a line segment from point to point
 	Segment's domain is inclusive with respect to points
 	"""

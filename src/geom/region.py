@@ -1,4 +1,4 @@
-class Region:
+class Region(object):
 	"""Represents a 2D region with a left and right
 	Inclusive on the left, exclusive on the right
 	"""

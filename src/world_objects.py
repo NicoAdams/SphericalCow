@@ -1,7 +1,7 @@
 import objects.object_group.ObjectGroup
 import objects.object.Object
 
-class WorldObjects:
+class WorldObjects(object):
 	"""Has an active layer and a dict of background layers
 	"""
 	

@@ -4,7 +4,7 @@ from segment import Segment
 import math
 import numpy
 
-class Shape:
+class Shape(object):
 	"""A polygon
 	(Only valid for convex shapes)
 	"""
