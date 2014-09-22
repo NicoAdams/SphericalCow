@@ -27,6 +27,9 @@ class Shape:
 			shapeStr += str(p)
 		return shapeStr + ")"
 	
+	def type(self):
+		return "polygon"
+	
 	def legal(self):
 		# Returns true if shape is legal
 		# TODO
@@ -166,8 +169,8 @@ class Shape:
 		return mtvVector
 	
 	def contains(self, point):
-		"""Determines whether a point is contained in a shape; should work on
-			both convex and concave shapes
+		"""Determines whether a point is contained in a shape
+		Should work on both convex and concave shapes
 		Arguments:
 			point: [Vector] A point
 		Returns: [bool] True if this shape contains the point in it, else False
@@ -198,6 +201,10 @@ class Shape:
 		Returns: [List [Vector]] A list of the points of intersection between
 			the shapes' sides
 		"""
+		# Lets other shapes handle more general intersection algorithms
+		if not other.type() == self.type():
+			return other.intersections(self)
+			
 		intersectList = []
 		for s1 in self.segments():
 			for s2 in other.segments():

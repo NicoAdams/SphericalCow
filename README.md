@@ -26,8 +26,6 @@ To test, run
 
 from the base directory.
 
-[Pending]
-
 Known Bugs
 ----------
 

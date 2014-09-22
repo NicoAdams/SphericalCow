@@ -15,4 +15,3 @@ class Rect(Shape):
 		self.points = points
 		self.rotate(angle, about=Vector(x,y))
 	
-	
