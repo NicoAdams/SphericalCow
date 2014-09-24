@@ -129,24 +129,6 @@ def test_contains():
 	assert s4.contains(Vector(7,2))
 	assert not s4.contains(Vector(7,20))
 	assert not s4.contains(Vector(7,-2))
-
-def test_intersections():
-	assert len(s0.intersections(s0)) == 0
-	assert len(s1.intersections(s0)) == 0
-	s1s1 = s1.intersections(s1, pThresh=.001)
-	assert len(s1s1) == 4
-	assert s1s1[0].equalsInRange(Vector(5,0), .001)
-	assert s1s1[1].equalsInRange(Vector(10,5), .001)
-	assert s1s1[2].equalsInRange(Vector(5,10), .001)
-	assert s1s1[3].equalsInRange(Vector(0,5), .001)
-	s1s1c = s1.copy().move(Vector(1,1)).intersections(s1)
-	assert len(s1s1c) == 2
-	assert s1s1c[0].equalsInRange(Vector(10,1), .001)
-	assert s1s1c[1].equalsInRange(Vector(1,10), .001)
-	
-	# Literally a corner case
-	s1s2 = s1.intersections(s2)
-	assert len(s1s2) == 2
 	
 def test_getCollisionPoint():
 	assert len(s0.getCollisionPoint(s0)) == 0

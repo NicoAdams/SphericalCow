@@ -45,13 +45,13 @@ def test_center():
 	assert s3.center() == Vector(-1,0)
 	assert s4.center() == Vector(-1,0)
 	
-def test_translate():
+def test_move():
 	print "0:", str(s1)
-	assert s0.copy().translate(Vector(0,0)) == \
+	assert s0.copy().move(Vector(0,0)) == \
 		Segment(Vector(0,0), Vector(0,0))
-	assert s0.copy().translate(Vector(1,1)) == \
+	assert s0.copy().move(Vector(1,1)) == \
 		Segment(Vector(1,1), Vector(1,1))
-	assert s1.copy().translate(Vector(1,10)) == \
+	assert s1.copy().move(Vector(1,10)) == \
 		Segment(Vector(1,10), Vector(4,14))
 
 def test_rotate():

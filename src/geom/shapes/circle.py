@@ -76,6 +76,76 @@ class Circle(Shape):
 		return self.center.sub(point).len() < self.radius
 	
 	def intersections(self, other):
-		# TODO
-		pass
-	
+		if other.type() == "polygon":
+			# Case 1: Polygon
+			intersectList = []
+			for segment in other.segments():
+				c = self.copy()
+				s = segment.copy()
+				
+				# Maps circle's center to origin, line to horizontal
+				toMove = c.center.mul(-1)
+				toRotate = -s.angle()
+				c.move(toMove)
+				s.move(toMove)
+				s.rotate(toRotate, about=c.center)
+				
+				# Calculates intersects
+				segmentHeight = s.p1.y
+				segmentSpan = Region(s.p1.x, s.p2.x)
+				segmentPoints = []
+				if segmentHeight >= circle.radius:
+					continue
+				else:
+					xMinPt = -math.sqrt(c.radius ** 2 - segmentHeight ** 2)
+					xMaxPt =  math.sqrt(c.radius ** 2 - segmentHeight ** 2)
+					if segmentSpan.contains(xMinPt):
+						segmentPoints.append(Vector(xMinPt, segmentHeight))
+					if segmentSpan.contains(xMaxPt):
+						segmentPoints.append(Vector(xMaxPt, segmentHeight))
+				
+				# Translates solutions back to original coordinates
+				for sp in segmentPoints:
+					sp = sp.rotate(-toRotate, about=c.center)
+					sp = sp.sub(toMove)
+					intersectList.append(sp)
+				
+			return intersectList
+			
+			
+		elif other.type() == "circle":
+			# Case 2: Circle
+			
+			# Displacement
+			d = other.center.sub(self.center).len()
+			# Displacement angle
+			dAngle = other.center.sub(self.center).angle()
+			
+			if d > other.radius + self.radius:
+				# Circles are too far apart; no intersects
+				return []
+			elif d < abs(other.radius - self.radius):
+				# One circle contains the other; no intersects
+				return []
+			else:
+				# Aliases
+				r1 = self.radius
+				r2 = other.radius
+				# Distance of intersect along displacement axis
+				d1 = (d*d + r1*r1 - r2*r2) / (2*d)
+				# Displacement of intersect perpendicularly from displacement axis
+				y1 = (r1*r1 - d1*d1)
+				
+				# Intersections
+				i1 = Vector(d1, y1)
+				i2 = Vector(d1, y1)
+				i1 = i1.add(self.center)
+				i2 = i2.add(self.center)
+				i1 = i1.rotate(dAngle)
+				i2 = i2.rotate(dAngle)
+				
+				return [i1, i2]
+		else:
+			# Leaves it up to other shapes
+			pass
+		

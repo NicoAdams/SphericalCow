@@ -41,7 +41,7 @@ class Segment(object):
 	def center(self):
 		return self.p1.add(self.p2).mul(.5)
 	
-	def translate(self, delta):
+	def move(self, delta):
 		"""Translates the segment by delta
 		Arguments:
 			delta: [Vector] The translation amount
@@ -80,12 +80,12 @@ class Segment(object):
 		if self.p2 == other.p1 or self.p2 == other.p2: return []
 		
 		# Maps problem to problem of locating other's x-intersect
-		toTranslate = self.p1.mul(-1)
+		toMove = self.p1.mul(-1)
 		toRotate = -1 * self.angle()
 		s1 = self.copy()
 		s2 = other.copy()
-		s1.translate(toTranslate)
-		s2.translate(toTranslate)
+		s1.move(toMove)
+		s2.move(toMove)
 		s1.rotate(toRotate)
 		s2.rotate(toRotate)
 		
