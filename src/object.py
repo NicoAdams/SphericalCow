@@ -13,16 +13,21 @@ class ObjectDef:
 		self.dynamic = False
 		self.solid = True
 		self.shape = Shape()
-		self.friction = 1
-		self.restitution
-
+		self.friction = 0
+		self.restitution = 0
+		
 class Object:
 	"""Represents a physics object
 	"""
 	
-	def __init__(self, shape):
-		"""Shape: The object's physical shape
+	def __init__(self, def):
 		"""
-		self.shape = shape
+		Arguments:
+			def: [ObjectDef] An object definition
+		"""
+		self.shape = def.shape
+		self.solid = def.solid
+		self.shape = def.shape
+		self.friction = def.friction
+		self.restitution = def.restitution
 	
-	def 
