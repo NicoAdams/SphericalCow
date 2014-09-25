@@ -4,6 +4,7 @@ from sphericalcow.geom.shape import Shape
 from sphericalcow.geom.vector import Vector
 from sphericalcow.geom.region import Region
 import math
+from sphericalcow.util import listEqualsInRange
 
 s0 = Shape([Vector(0,0)])
 s1 = Shape([Vector(0,0), Vector(10,0), Vector(10,10), Vector(0,10)])
@@ -96,10 +97,8 @@ def test_getCollisionAxes():
 	
 	l1 = s1.getCollisionAxes(s0)
 	assert len(l1) == 4
-	assert l1[0].equalsInRange(Vector(0, 1), .01)
-	assert l1[1].equalsInRange(Vector(-1, 0), .01)
-	assert l1[2].equalsInRange(Vector(0, -1), .01)
-	assert l1[3].equalsInRange(Vector(1, 0), .01)
+	assert listEqualsInRange(l1, \
+		[Vector(0,1), Vector(-1,0), Vector(0,-1), Vector(1,0)], .01)
 
 def test_mtv():
 	assert s0.mtv(s1) == Vector(0,0)
