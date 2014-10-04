@@ -3,6 +3,7 @@ from vector import Vector
 from segment import Segment
 import math
 import numpy
+from ..util import listEquals
 
 class Shape(object):
 	"""A polygon
@@ -17,7 +18,7 @@ class Shape(object):
 		self.points = points
 	
 	def __eq__(self, other):
-		return self.points == other.points
+		return listEquals(self.points, other.points)
 	
 	def __str__(self):
 		shapeStr = "Shape("

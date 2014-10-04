@@ -1,5 +1,6 @@
 import math
 import numpy
+from ..util import reqTypes
 
 class Vector(object):
 	"""A 2D vector
@@ -37,11 +38,26 @@ class Vector(object):
 	def add(self, other):
 		return Vector(self.x + other.x, self.y + other.y)
 	
+	def __add__(self, other):
+		return self.add(other)
+	
 	def sub(self, other):
 		return self.add(other.mul(-1))
+		
+	def __sub__(self, other):
+		return self.sub(other)
 	
 	def dot(self, other):
 		return self.x * other.x + self.y * other.y
+	
+	def __mul__(self, other):
+		reqTypes(other, [int, Vector])
+		if isinstance(other, Vector):
+			return self.dot(other)
+		return self.mul(other)
+		
+	def __rmul__(self, other):
+		return self.__mul__(other)
 	
 	def scalarCross(self, other):
 		"""

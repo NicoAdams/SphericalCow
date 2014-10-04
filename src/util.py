@@ -23,7 +23,7 @@ def reqType(a, t):
 		raise TypeError("reqType: Second argument should be type, was "+str(t))
 	
 	if not isinstance(a, t):
-		raise TypeError("reqType: "+str(a)+" should be an instance of "+str(t))
+		raise TypeError("reqType: Argument should be an instance of "+str(t))
 
 def reqTypes(a, typeList):
 	"""Requires a to have a type in list typeList
@@ -42,7 +42,7 @@ def reqTypes(a, typeList):
 		if not isinstance(t, type):
 			raise TypeError("reqTypes: "+str(t)+" in type list is not a type")
 		if isinstance(a, t): return
-	raise TypeError("reqTypes: "+str(a)+" was not one of the types specified")
+	raise TypeError("reqTypes: Argument was not one of the types specified")
 
 def listEquals(list1, list2, eqFunction=None):
 	"""Tests to see if list1 and list2 contain the same elements (in any order)
